@@ -3,48 +3,40 @@ package org.aren.particleanimationapi.animation;
 import lombok.Getter;
 import lombok.Setter;
 import org.aren.particleanimationapi.animation.animate.Animate;
-import org.aren.particleanimationapi.particle.ParticleWrapper;
 import org.aren.particleanimationapi.pattern.Pattern;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 @Getter
 @Setter
 public class AnimationImpl implements Animation {
 
-    private Function<Integer, ParticleWrapper> particleFunction;
     private Pattern pattern;
     private Location location;
     private int delay = 0;
     private int frame = 0;
     private List<Animate> animates = new ArrayList<>();
 
-    public AnimationImpl(Pattern defaultPattern, Location location, Function<Integer, ParticleWrapper> function) {
+    public AnimationImpl(Pattern defaultPattern, Location location) {
         this.pattern = defaultPattern;
         this.location = location;
-        this.particleFunction = function;
     }
 
+    @Override
     public void addAnimate(Animate animate) {
         this.animates.add(animate);
     }
 
+    @Override
     public void removeAnimate(int index) {
         this.animates.remove(index);
     }
 
     public void show() {
-        int patternCount = 0;
-
-        for (Location loc : pattern.draw(location)) {
-            particleFunction.apply(patternCount).showParticle(loc);
-            patternCount++;
-        }
-
+        pattern.drawParticle(location);
     }
 
     public void animate() {

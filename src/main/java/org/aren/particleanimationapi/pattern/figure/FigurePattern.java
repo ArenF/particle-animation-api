@@ -17,4 +17,9 @@ public abstract class FigurePattern implements Pattern {
     public Collection<Location> draw(Location location) {
         return this.pattern.draw(location);
     }
+
+    @Override
+    public void drawParticle(Location location) {
+        pattern.drawParticle(location);
+    }
 }

@@ -1,8 +1,6 @@
 package org.aren.particleanimationapi.animation;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -21,11 +19,6 @@ public class Animator {
     @Builder.Default
     private long period = 1L;
 
-    public Animator(AnimationImpl animation, JavaPlugin plugin) {
-        this.animation = animation;
-        this.plugin = plugin;
-    }
-
     public void run() {
         if (this.cancelled) {
             this.cancelled = false;
@@ -33,9 +26,8 @@ public class Animator {
                 public void run() {
                     if (animation.getFrame() >= animation.getAnimates().size() && animation.getDelay() <= 0) {
                         cancel();
-                    } else {
-                        animation.animate();
                     }
+                    animation.animate();
                 }
             }, this.delay, this.period);
         }

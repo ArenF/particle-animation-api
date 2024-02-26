@@ -6,7 +6,7 @@ import org.bukkit.util.Vector;
 
 public class TrianglePattern extends FigurePattern {
     public TrianglePattern(double rad, Axis axis) {
-        super(Pattern.builder().name("triangle").range(0.0, 360.0).offset(0.0, 0.0, 0.0).xyz((i) -> {
+        super(Pattern.builder().range(0.0, 360.0).offset(0.0, 0.0, 0.0).xyz((i) -> {
             short angle;
             if (i <= 120.0) {
                 angle = 120;

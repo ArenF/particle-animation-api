@@ -11,7 +11,7 @@ public class CirclePattern extends FigurePattern {
 
 
     public CirclePattern(double rad, Axis axis) {
-        super(Pattern.builder().name("circle").range(0.0, 360.0).offset(0.0, 0.0, 0.0).xyz((i) -> {
+        super(Pattern.builder().range(0.0, 360.0).offset(0.0, 0.0, 0.0).xyz((i) -> {
             double y = rad * Math.sin(Math.toRadians(i));
             double x = rad * Math.cos(Math.toRadians(i));
             switch (axis) {

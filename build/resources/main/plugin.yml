@@ -1,5 +1,5 @@
 name: ParticleAnimationAPI
-version: '${version}'
+version: '1.0-SNAPSHOT'
 main: org.aren.particleanimationapi.ParticleAnimationAPI
 api-version: '1.16'
 

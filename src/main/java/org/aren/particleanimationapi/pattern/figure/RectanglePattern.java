@@ -6,7 +6,7 @@ import org.bukkit.util.Vector;
 
 public class RectanglePattern extends FigurePattern {
     public RectanglePattern(double rad, Axis axis) {
-        super(Pattern.builder().name("rectangle").range(0.0, 360.0).offset(0.0, 0.0, 0.0).xyz((i) -> {
+        super(Pattern.builder().range(0.0, 360.0).offset(0.0, 0.0, 0.0).xyz((i) -> {
             double radius = rad * Math.sqrt(2.0);
             int angle = 45;
             if (i < 90.0) {

@@ -2,9 +2,11 @@ package org.aren.particleanimationapi.pattern;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.aren.particleanimationapi.particle.ParticleWrapper;
 import org.aren.particleanimationapi.util.Range;
 import org.aren.particleanimationapi.util.RotationMatrixFormula;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -18,21 +20,22 @@ public class CustomPattern implements Pattern {
 
     private Range range;
     private Function<Double, Vector> xyz;
+    private Function<Integer, ParticleWrapper> function;
     private double offsetX;
     private double offsetY;
     private double offsetZ;
-    private String patternName;
     private Collection<Pattern> nextPatterns;
 
     public CustomPattern(Pattern.PatternBuilder builder) {
         this.range = builder.range;
-        this.patternName = builder.patternName;
         this.offsetX = builder.offsetX;
         this.offsetY = builder.offsetY;
         this.offsetZ = builder.offsetZ;
         this.xyz = builder.xyz;
+        this.function = builder.function;
         this.nextPatterns = builder.patterns == null ? new ArrayList<>() : builder.patterns;
     }
+
 
     @Override
     public Collection<Location> draw(Location location) {
@@ -45,17 +48,32 @@ public class CustomPattern implements Pattern {
                         clonedLocation
                 );
                 result.add(clonedLocation.add(vector));
-
             }
         }
 
-        if (nextPatterns == null) {
-            return result;
-        } else {
+//        if (nextPatterns == null) {
+//            return result;
+//        } else {
+//            for (Pattern pattern : nextPatterns) {
+//                result.addAll(pattern.draw(location));
+//            }
+//            return result;
+//        }
+        return result;
+    }
+
+    @Override
+    public void drawParticle(Location location) {
+        int i = 0;
+        for (Location loc : draw(location)) {
+            function.apply(i).showParticle(loc);
+            i++;
+        }
+
+        if (!nextPatterns.isEmpty()) {
             for (Pattern pattern : nextPatterns) {
-                result.addAll(pattern.draw(location));
+                pattern.drawParticle(location);
             }
-            return result;
         }
     }
 }
