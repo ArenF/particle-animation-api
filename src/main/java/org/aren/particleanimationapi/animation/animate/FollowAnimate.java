@@ -1,6 +1,6 @@
 package org.aren.particleanimationapi.animation.animate;
 
-import org.aren.particleanimationapi.animation.Animation;
+import org.aren.particleanimationapi.animation.AnimationImpl;
 import org.bukkit.entity.Entity;
 
 public class FollowAnimate implements Animate {
@@ -12,7 +12,7 @@ public class FollowAnimate implements Animate {
     }
 
     @Override
-    public void play(Animation animation) {
+    public void play(AnimationImpl animation) {
         animation.setLocation(entity.getLocation());
     }
 

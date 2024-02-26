@@ -1,6 +1,6 @@
 package org.aren.particleanimationapi.animation.animate;
 
-import org.aren.particleanimationapi.animation.Animation;
+import org.aren.particleanimationapi.animation.AnimationImpl;
 import org.aren.particleanimationapi.pattern.Pattern;
 
 public class ChangeAnimate implements Animate {
@@ -12,7 +12,7 @@ public class ChangeAnimate implements Animate {
     }
 
     @Override
-    public void play(Animation animation) {
+    public void play(AnimationImpl animation) {
         animation.setPattern(pattern);
     }
 

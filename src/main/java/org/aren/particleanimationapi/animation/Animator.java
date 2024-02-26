@@ -1,28 +1,29 @@
 package org.aren.particleanimationapi.animation;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
+@Builder
 public class Animator {
 
-    @Getter
-    @Setter
-    private Animation animation;
-    private BukkitTask task;
-    @Getter
-    private boolean cancelled;
+    private AnimationImpl animation;
+    @Builder.Default
+    private BukkitTask task = null;
+    @Builder.Default
+    private boolean cancelled = true;
     private JavaPlugin plugin;
-    private long delay;
-    private long period;
+    @Builder.Default
+    private long delay = 0L;
+    @Builder.Default
+    private long period = 1L;
 
-    public Animator(JavaPlugin plugin, long delay, long period) {
+    public Animator(AnimationImpl animation, JavaPlugin plugin) {
+        this.animation = animation;
         this.plugin = plugin;
-        this.delay = delay;
-        this.period = period;
-        this.cancelled = true;
     }
 
     public void run() {
@@ -30,10 +31,10 @@ public class Animator {
             this.cancelled = false;
             this.task = Bukkit.getScheduler().runTaskTimer(this.plugin, new Runnable() {
                 public void run() {
-                    if (Animator.this.animation.getFrame() >= Animator.this.animation.getAnimates().size() && Animator.this.animation.getDelay() <= 0) {
-                        Animator.this.cancel();
+                    if (animation.getFrame() >= animation.getAnimates().size() && animation.getDelay() <= 0) {
+                        cancel();
                     } else {
-                        Animator.this.animation.animate();
+                        animation.animate();
                     }
                 }
             }, this.delay, this.period);

@@ -1,6 +1,6 @@
 package org.aren.particleanimationapi.animation.animate;
 
-import org.aren.particleanimationapi.animation.Animation;
+import org.aren.particleanimationapi.animation.AnimationImpl;
 import org.bukkit.Location;
 
 public class RotateAnimate implements Animate {
@@ -14,7 +14,7 @@ public class RotateAnimate implements Animate {
     }
 
     @Override
-    public void play(Animation animation) {
+    public void play(AnimationImpl animation) {
         Location location = animation.getLocation();
         location.setPitch(pitch);
         location.setYaw(yaw);

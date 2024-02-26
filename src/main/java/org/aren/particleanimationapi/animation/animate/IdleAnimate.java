@@ -1,6 +1,6 @@
 package org.aren.particleanimationapi.animation.animate;
 
-import org.aren.particleanimationapi.animation.Animation;
+import org.aren.particleanimationapi.animation.AnimationImpl;
 
 public class IdleAnimate implements Animate {
 
@@ -11,7 +11,7 @@ public class IdleAnimate implements Animate {
     }
 
     @Override
-    public void play(Animation animation) {
+    public void play(AnimationImpl animation) {
         animation.setDelay(delay);
     }
 

@@ -1,9 +1,9 @@
 package org.aren.particleanimationapi.animation.animate;
 
-import org.aren.particleanimationapi.animation.Animation;
+import org.aren.particleanimationapi.animation.AnimationImpl;
 
 public interface Animate {
 
-    void play(Animation animation);
+    void play(AnimationImpl animation);
     String getType();
 }
