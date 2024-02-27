@@ -1,8 +1,0 @@
-name: ParticleAnimationAPI
-version: '1.0-SNAPSHOT'
-main: org.aren.particleanimationapi.ParticleAnimationAPI
-api-version: '1.16'
-
-commands:
-  test:
-    description: "for Test"

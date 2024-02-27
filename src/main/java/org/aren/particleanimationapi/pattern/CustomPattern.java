@@ -36,12 +36,10 @@ public class CustomPattern implements Pattern {
         this.nextPatterns = builder.patterns == null ? new ArrayList<>() : builder.patterns;
     }
 
-
-    @Override
-    public Collection<Location> draw(Location location) {
+    private Collection<Location> currentDraw(Location location) {
         Collection<Location> result = new ArrayList<>();
         if (this.range.getMin() != this.range.getMax()) {
-            for(double i = this.range.getMin(); i <= this.range.getMax(); i += this.range.getIncrease()) {
+            for (double i = this.range.getMin(); i <= this.range.getMax(); i += this.range.getIncrease()) {
                 Location clonedLocation = location.clone();
                 Vector vector = RotationMatrixFormula.rotateAboutVector(
                         this.xyz.apply(i).add(new Vector(offsetX, offsetY, offsetZ)),
@@ -51,21 +49,27 @@ public class CustomPattern implements Pattern {
             }
         }
 
-//        if (nextPatterns == null) {
-//            return result;
-//        } else {
-//            for (Pattern pattern : nextPatterns) {
-//                result.addAll(pattern.draw(location));
-//            }
-//            return result;
-//        }
         return result;
+    }
+
+    @Override
+    public Collection<Location> draw(Location location) {
+        Collection<Location> result = currentDraw(location);
+
+        if (nextPatterns == null) {
+            return result;
+        } else {
+            for (Pattern pattern : nextPatterns) {
+                result.addAll(pattern.draw(location));
+            }
+            return result;
+        }
     }
 
     @Override
     public void drawParticle(Location location) {
         int i = 0;
-        for (Location loc : draw(location)) {
+        for (Location loc : currentDraw(location)) {
             function.apply(i).showParticle(loc);
             i++;
         }
