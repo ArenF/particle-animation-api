@@ -22,11 +22,11 @@ public class AnimateFactory {
         return new ChangeAnimate(pattern);
     }
 
-    public static Animate createFollow(Entity entity) {
-        return new FollowAnimate(entity);
+    public static Animate createFollow(Entity entity, boolean force) {
+        return new FollowAnimate(entity, force);
     }
 
-    public static Animate createFollow(Entity entity, boolean onEyeLocation) {
-        return new FollowAnimate(entity, onEyeLocation);
+    public static Animate createFollow(Entity entity, boolean onEyeLocation, boolean force) {
+        return new FollowAnimate(entity, onEyeLocation, force);
     }
 }
