@@ -25,4 +25,8 @@ public class AnimateFactory {
     public static Animate createFollow(Entity entity) {
         return new FollowAnimate(entity);
     }
+
+    public static Animate createFollow(Entity entity, boolean onEyeLocation) {
+        return new FollowAnimate(entity, onEyeLocation);
+    }
 }

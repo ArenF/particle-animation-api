@@ -15,7 +15,7 @@ public class MoveAnimate implements Animate {
     @Override
     public void play(AnimationImpl animation) {
         Vector adder = RotationMatrixFormula.rotateAboutVector(vector, animation.getLocation());
-        animation.setLocation(animation.getLocation().add(adder));
+        animation.setLocation(animation.getLocation().clone().add(adder));
     }
 
     @Override

@@ -16,8 +16,8 @@ public class RotateAnimate implements Animate {
     @Override
     public void play(AnimationImpl animation) {
         Location location = animation.getLocation();
-        location.setPitch(pitch);
-        location.setYaw(yaw);
+        location.setPitch(location.getPitch() + pitch);
+        location.setYaw(location.getYaw() + yaw);
         animation.setLocation(location);
     }
 
