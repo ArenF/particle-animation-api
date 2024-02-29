@@ -10,18 +10,18 @@ public class FollowAnimate implements Animate {
     private Entity entity;
     private boolean onEyeLocation;
 //  해당 엔티티의 pitch와 yaw 까지 같이 적용된다.
-    private boolean force;
+    private boolean withSight;
 
-    public FollowAnimate(Entity entity, boolean isOnEyeLocation, boolean force) {
+    public FollowAnimate(Entity entity, boolean isOnEyeLocation, boolean withSight) {
         this.entity = entity;
         this.onEyeLocation = isOnEyeLocation;
-        this.force = force;
+        this.withSight = withSight;
     }
 
-    public FollowAnimate(Entity entity, boolean force) {
+    public FollowAnimate(Entity entity, boolean withSight) {
         this.entity = entity;
         this.onEyeLocation = false;
-        this.force = force;
+        this.withSight = withSight;
     }
 
     @Override
@@ -31,19 +31,19 @@ public class FollowAnimate implements Animate {
         if (onEyeLocation) {
             if (entity instanceof LivingEntity) {
                 LivingEntity living = (LivingEntity) entity;
-                loc = location(living.getEyeLocation(), force);
+                loc = location(living.getEyeLocation(), withSight);
             } else {
-                loc = location(entity.getLocation(), force);
+                loc = location(entity.getLocation(), withSight);
             }
         } else {
-            loc = location(entity.getLocation(), force);
+            loc = location(entity.getLocation(), withSight);
         }
 
         animation.setLocation(loc);
     }
 
-    private Location location(Location location, boolean force) {
-        return force ? new Location(
+    private Location location(Location location, boolean withSight) {
+        return !withSight ? new Location(
                 location.getWorld(),
                 location.getX(),
                 location.getY(),
