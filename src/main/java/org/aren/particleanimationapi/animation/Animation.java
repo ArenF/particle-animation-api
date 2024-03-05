@@ -11,6 +11,7 @@ import java.util.function.Function;
 public interface Animation {
     void play(JavaPlugin plugin);
     void play(JavaPlugin plugin, long delay, long period);
+    void stop();
 
     void addAnimate(Animate animate);
     void removeAnimate(int index);

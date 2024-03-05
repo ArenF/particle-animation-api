@@ -19,6 +19,7 @@ public class AnimationImpl implements Animation {
     private int delay = 0;
     private int frame = 0;
     private List<Animate> animates = new ArrayList<>();
+    private Animator animator;
 
     public AnimationImpl(Pattern defaultPattern, Location location) {
         this.pattern = defaultPattern;
@@ -54,7 +55,7 @@ public class AnimationImpl implements Animation {
 
     @Override
     public void play(JavaPlugin plugin) {
-        Animator animator = Animator.builder()
+        animator = Animator.builder()
                 .plugin(plugin)
                 .animation(this)
                 .delay(0)
@@ -65,12 +66,19 @@ public class AnimationImpl implements Animation {
 
     @Override
     public void play(JavaPlugin plugin, long delay, long period) {
-        Animator animator = Animator.builder()
+        animator = Animator.builder()
                 .plugin(plugin)
                 .animation(this)
                 .delay(delay)
                 .period(period)
                 .build();
         animator.run();
+    }
+
+    @Override
+    public void stop() {
+        if (animator == null)
+            return;
+        animator.cancel();
     }
 }
